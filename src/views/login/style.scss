@@ -6,10 +6,23 @@
     no-repeat center 110px;
   background-size: 100%;
   flex-direction: column;
+  .anticon-plus {
+    position: relative;
+    top: 4px;
+  }
   .login-right {
     position: absolute;
     right: 0;
     top: 0;
+  }
+  .captcha {
+    display: block;
+    cursor: pointer;
+    height: 30px;
+    border-left: 1px solid #ccc;
+  }
+  .anticon {
+    color: rgba(0, 0, 0, 0.3);
   }
   .wrap {
     flex: 1 1;
@@ -19,6 +32,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    .ant-input-affix-wrapper:not(:first-child) {
+      margin-top: 20px;
+    }
     .other-login {
       margin-top: 15px;
       display: flex;
@@ -30,7 +46,7 @@
         flex: 1 1;
         text-align: right;
         color: #20abfe;
-        .text-right{
+        .text-right {
           cursor: pointer;
         }
       }

@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { connect } from "react-redux";
 import { StoreState } from "../../store";
 import { Button, Tooltip, Input, message } from "antd";
-import { GithubOutlined } from "@ant-design/icons";
+import { getRandom } from "../../utils/random";
+import API from "../../api";
+import {
+  GithubOutlined,
+  UserOutlined,
+  LockOutlined,
+  PictureOutlined,
+} from "@ant-design/icons";
 import { Footer } from "../../components";
 import "./style.scss";
 
 interface Iprops {}
 
+let captcha = getRandom();
+
 const Login: React.FC<Iprops> = (props) => {
+  const reloadCaptcha = useCallback((e) => {
+    captcha = getRandom();
+    let url = API.getCaptcha + captcha;
+    e.target.src = url;
+  }, []);
+
   return (
     <section className="login-page">
       <a
@@ -28,7 +43,40 @@ const Login: React.FC<Iprops> = (props) => {
             <img className="logo" src={require("../../assets/common/sh.png")} />
             <em>TS + Hooks</em>
           </div>
-          <Button size="large" className="weitiao-btn" block={true} type="primary">
+          <Input.Group>
+            <Input
+              prefix={<UserOutlined />}
+              maxLength={32}
+              autoComplete="off"
+              placeholder="UserName"
+            />
+            <Input
+              prefix={<LockOutlined />}
+              type="password"
+              maxLength={32}
+              autoComplete="off"
+              placeholder="password"
+            />
+            <Input
+              prefix={<PictureOutlined className="anticon-plus" />}
+              maxLength={4}
+              autoComplete="off"
+              placeholder="请输入验证码"
+              suffix={
+                <img
+                  className="captcha"
+                  src={API.getCaptcha + captcha}
+                  onClick={reloadCaptcha}
+                />
+              }
+            />
+          </Input.Group>
+          <Button
+            size="large"
+            className="weitiao-btn"
+            block={true}
+            type="primary"
+          >
             登录
           </Button>
           <div className="other-login">
