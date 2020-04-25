@@ -1,0 +1,67 @@
+.login-page {
+  display: flex;
+  min-height: 100vh;
+  background: #f0f2f5
+    url(https://xiejiahe.gitee.io/tomato-work/static/media/bg.5825f033.svg)
+    no-repeat center 110px;
+  background-size: 100%;
+  flex-direction: column;
+  .login-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .wrap {
+    flex: 1 1;
+    margin-bottom: 150px;
+    width: 320px;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .other-login {
+      margin-top: 15px;
+      display: flex;
+      .txt {
+        margin-right: 15px;
+        vertical-align: text-bottom;
+      }
+      .href-right {
+        flex: 1 1;
+        text-align: right;
+        color: #20abfe;
+        .text-right{
+          cursor: pointer;
+        }
+      }
+      .github-icon {
+        cursor: pointer;
+        transition: 0.1s linear;
+        font-size: 22px;
+        color: #ccc;
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+    .weitiao-btn {
+      margin-top: 20px;
+    }
+    .logo-wrap {
+      margin-bottom: 20px;
+      text-align: center;
+      .logo {
+        width: 100px;
+        height: 100px;
+        -webkit-user-drag: none;
+      }
+    }
+    em {
+      font-size: 24px;
+      font-weight: 700;
+      color: #000;
+      margin-left: 15px;
+      vertical-align: middle;
+    }
+  }
+}

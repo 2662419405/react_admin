@@ -347,3 +347,18 @@ template {
 [hidden] {
   display: none;
 }
+
+em,
+i {
+  font-style: normal;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
