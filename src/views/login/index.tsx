@@ -3,7 +3,7 @@
 // ==================
 // 所需的各种插件
 // ==================
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { StoreState } from "../../store";
 import { getRandom } from "../../utils";
@@ -38,7 +38,28 @@ const Login: React.FC<Iprops> = (props) => {
   const username = useInput("");
   const password = useInput("");
   const code = useInput("");
+  const inputRef = useRef<any>(null);
   const [loading, setLoading] = useState(false);
+
+  /**
+   * 判断是否登录过 && 获取焦点
+   */
+  useEffect(() => {
+    const userinfo = localStorage.getItem("userinfo")
+      ? JSON.parse(localStorage.getItem("userinfo") as string)
+      : null;
+    console.log(userinfo);
+    if (userinfo) {
+      props.history.replace("/home");
+    } else {
+      inputRef.current.focus();
+    }
+  }, []);
+
+  /**
+   * @function
+   * 登录校验 发出请求
+   */
   const handleSubmit = async () => {
     const _loginName = username.val.trim();
     const _password = password.val.trim();
@@ -58,6 +79,10 @@ const Login: React.FC<Iprops> = (props) => {
       setLoading(false);
       // 登录成功
       if (_loginName === data.username && _password === data.password) {
+        localStorage.setItem(
+          "userinfo",
+          JSON.stringify({ _loginName, _password })
+        );
         props.history.replace("/home");
       } else {
         throw new Error("用户名密码错误");
@@ -98,12 +123,13 @@ const Login: React.FC<Iprops> = (props) => {
           </div>
           <Input.Group>
             <Input
+              ref={inputRef}
               {...username}
               onPressEnter={handleSubmit}
               prefix={<UserOutlined />}
               maxLength={32}
               autoComplete="off"
-              placeholder="Username"
+              placeholder="username/admin"
             />
             <Input
               {...password}
@@ -112,7 +138,7 @@ const Login: React.FC<Iprops> = (props) => {
               type="password"
               maxLength={32}
               autoComplete="off"
-              placeholder="password"
+              placeholder="password/123456"
             />
             <Input
               {...code}
