@@ -1,10 +1,21 @@
-import React, { useCallback } from "react";
+/** 登录页面  */
+
+// ==================
+// 所需的各种插件
+// ==================
+import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { StoreState } from "../../store";
-import { Button, Tooltip, Input, message } from "antd";
-import { getRandom } from "../../utils/random";
+import { getRandom } from "../../utils";
 import API from "../../api";
-import { RouteComponentProps } from "react-router-dom";
+import { getUserLoginData } from "../../services";
+import "./style.scss";
+
+// ==================
+// 所需的所有组件
+// ==================
+import { Button, Tooltip, Input, message } from "antd";
+import useInput from "../../hooks/useInput";
 import {
   GithubOutlined,
   UserOutlined,
@@ -12,15 +23,50 @@ import {
   PictureOutlined,
 } from "@ant-design/icons";
 import { Footer } from "../../components";
-import "./style.scss";
+
+// ==================
+// 类型声明
+// ==================
+import { RouteComponentProps } from "react-router-dom";
+import { Ilogin } from "../../interface";
 
 interface Iprops extends RouteComponentProps {}
 
 let captcha = getRandom();
 
 const Login: React.FC<Iprops> = (props) => {
-  const handleSubmit = () => {};
-  console.log(props);
+  const username = useInput("");
+  const password = useInput("");
+  const code = useInput("");
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = async () => {
+    const _loginName = username.val.trim();
+    const _password = password.val.trim();
+    const _code = code.val.trim();
+
+    try {
+      if (!_loginName) throw new Error("用户名不能为空");
+      if (!_password) throw new Error("密码不能为空");
+      if (!_code) throw new Error("验证码不能为空");
+      if (_code !== captcha) throw new Error("验证码错误");
+
+      setLoading(true);
+      const data = (await getUserLoginData({
+        data: { _loginName, _password },
+        url: API.getLogin,
+      })) as Ilogin;
+      setLoading(false);
+      // 登录成功
+      if (_loginName === data.username && _password === data.password) {
+        props.history.replace("/home");
+      } else {
+        throw new Error("用户名密码错误");
+      }
+    } catch (err) {
+      message.error(err.message);
+      return;
+    }
+  };
   const reloadCaptcha = useCallback((e) => {
     captcha = getRandom();
     let url = API.getCaptcha + captcha;
@@ -52,6 +98,7 @@ const Login: React.FC<Iprops> = (props) => {
           </div>
           <Input.Group>
             <Input
+              {...username}
               onPressEnter={handleSubmit}
               prefix={<UserOutlined />}
               maxLength={32}
@@ -59,6 +106,7 @@ const Login: React.FC<Iprops> = (props) => {
               placeholder="Username"
             />
             <Input
+              {...password}
               prefix={<LockOutlined />}
               onPressEnter={handleSubmit}
               type="password"
@@ -67,6 +115,10 @@ const Login: React.FC<Iprops> = (props) => {
               placeholder="password"
             />
             <Input
+              {...code}
+              onKeyDown={(e) => {
+                if (e.keyCode === 13) handleSubmit();
+              }}
               prefix={<PictureOutlined className="anticon-plus" />}
               onPressEnter={handleSubmit}
               maxLength={4}
@@ -87,9 +139,10 @@ const Login: React.FC<Iprops> = (props) => {
             className="weitiao-btn"
             block={true}
             type="primary"
-            onClick={() => props.history.push("/home")}
+            onClick={handleSubmit}
+            loading={loading}
           >
-            登录
+            {loading ? "正在登录" : "登录"}
           </Button>
           <div className="other-login">
             <span className="txt">其他登录方式</span>

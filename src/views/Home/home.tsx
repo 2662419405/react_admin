@@ -1,14 +1,13 @@
+import React, { ReactElement, useEffect } from "react";
+import Axios from "axios";
 
-import React, { ReactElement } from 'react'
+interface Props {}
 
-interface Props {
-    
-}
-
-export default function home({}: Props): ReactElement {
-    return (
-        <div>
-            123
-        </div>
-    )
+export default function Home({}: Props): ReactElement {
+  useEffect(() => {
+    Axios.get("http://mock.shtodream.cn/mock/5ea655fa0f0ab03f6d504777/login").then((res) => {
+      console.log(res);
+    });
+  }, []);
+  return <div>123</div>;
 }
