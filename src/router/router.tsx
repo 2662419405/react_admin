@@ -1,13 +1,18 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Login from "../views/login/index";
+import { Loading } from "../components";
+import Login from "../views/login";
+const Home = React.lazy(() => import("../views/Home/home"));
 
-const Routers: React.FC<{}> = (props) => {
+const Routers: React.FC<{}> = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/" component={Login} />
-      </Switch>
+      <Suspense fallback={<Loading />}>
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route path="/home" component={Home} />
+        </Switch>
+      </Suspense>
     </BrowserRouter>
   );
 };

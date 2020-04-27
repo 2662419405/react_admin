@@ -4,6 +4,7 @@ import { StoreState } from "../../store";
 import { Button, Tooltip, Input, message } from "antd";
 import { getRandom } from "../../utils/random";
 import API from "../../api";
+import { RouteComponentProps } from "react-router-dom";
 import {
   GithubOutlined,
   UserOutlined,
@@ -13,11 +14,13 @@ import {
 import { Footer } from "../../components";
 import "./style.scss";
 
-interface Iprops {}
+interface Iprops extends RouteComponentProps {}
 
 let captcha = getRandom();
 
 const Login: React.FC<Iprops> = (props) => {
+  const handleSubmit = () => {};
+  console.log(props);
   const reloadCaptcha = useCallback((e) => {
     captcha = getRandom();
     let url = API.getCaptcha + captcha;
@@ -40,18 +43,24 @@ const Login: React.FC<Iprops> = (props) => {
       <div className="wrap">
         <div>
           <div className="logo-wrap">
-            <img className="logo" src={require("../../assets/common/sh.png")} />
+            <img
+              alt="logo"
+              className="logo"
+              src={require("../../assets/img/sh.png")}
+            />
             <em>TS + Hooks</em>
           </div>
           <Input.Group>
             <Input
+              onPressEnter={handleSubmit}
               prefix={<UserOutlined />}
               maxLength={32}
               autoComplete="off"
-              placeholder="UserName"
+              placeholder="Username"
             />
             <Input
               prefix={<LockOutlined />}
+              onPressEnter={handleSubmit}
               type="password"
               maxLength={32}
               autoComplete="off"
@@ -59,6 +68,7 @@ const Login: React.FC<Iprops> = (props) => {
             />
             <Input
               prefix={<PictureOutlined className="anticon-plus" />}
+              onPressEnter={handleSubmit}
               maxLength={4}
               autoComplete="off"
               placeholder="请输入验证码"
@@ -67,6 +77,7 @@ const Login: React.FC<Iprops> = (props) => {
                   className="captcha"
                   src={API.getCaptcha + captcha}
                   onClick={reloadCaptcha}
+                  alt="code"
                 />
               }
             />
@@ -76,6 +87,7 @@ const Login: React.FC<Iprops> = (props) => {
             className="weitiao-btn"
             block={true}
             type="primary"
+            onClick={() => props.history.push("/home")}
           >
             登录
           </Button>
@@ -85,7 +97,7 @@ const Login: React.FC<Iprops> = (props) => {
             <div className="href-right">
               <Tooltip
                 placement="bottom"
-                title="账号密码分别为123456,推荐使用第三方github进行登录"
+                title="账号为admin,密码为123456,推荐使用第三方github进行登录"
               >
                 <span className="text-right">注册账号</span>
               </Tooltip>

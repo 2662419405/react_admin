@@ -32,9 +32,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    .ant-input-affix-wrapper:not(:first-child) {
-      margin-top: 20px;
-    }
     .other-login {
       margin-top: 15px;
       display: flex;
@@ -59,9 +56,6 @@
           color: #000;
         }
       }
-    }
-    .weitiao-btn {
-      margin-top: 20px;
     }
     .logo-wrap {
       margin-bottom: 20px;

@@ -3,12 +3,18 @@ import "./style.scss";
 
 const Footer: React.FC<{}> = (props) => {
   return (
-    <footer className="global-footer">
-      Copyright © 2020 -{" "}
-      <a rel="noopener noreferrer" href="https://github.com/2662419405" target="_blank">
-        2662419405
-      </a>
-    </footer>
+    <div className="global-footer">
+      <div>
+        Copyright @ 2020 TS+Hooks
+        <a
+          href="https://github.com/2662419405"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          &nbsp;2662419405
+        </a>
+      </div>
+    </div>
   );
 };
 
