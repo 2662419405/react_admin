@@ -5,32 +5,35 @@
 // ==================
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { StoreState } from "../../store";
-import { getRandom } from "../../utils";
-import API from "../../api";
-import { getUserLoginData } from "../../services";
+import { StoreState } from "src/store";
+import { getRandom } from "src/utils";
+import API from "src/api";
+import { getUserLoginData } from "src/services";
+import { setUserInfo } from "src/store/actions";
 import "./style.scss";
 
 // ==================
 // 所需的所有组件
 // ==================
 import { Button, Tooltip, Input, message } from "antd";
-import useInput from "../../hooks/useInput";
+import useInput from "src/hooks/useInput";
 import {
   GithubOutlined,
   UserOutlined,
   LockOutlined,
   PictureOutlined,
 } from "@ant-design/icons";
-import { Footer } from "../../components";
+import { Footer } from "src/components";
 
 // ==================
 // 类型声明
 // ==================
 import { RouteComponentProps } from "react-router-dom";
-import { Ilogin } from "../../interface";
+import { Ilogin } from "src/interface";
 
-interface Iprops extends RouteComponentProps {}
+interface Iprops extends RouteComponentProps {
+  setUserInfoMy: any;
+}
 
 let captcha = getRandom();
 
@@ -48,7 +51,6 @@ const Login: React.FC<Iprops> = (props) => {
     const userinfo = localStorage.getItem("userinfo")
       ? JSON.parse(localStorage.getItem("userinfo") as string)
       : null;
-    console.log(userinfo);
     if (userinfo) {
       props.history.replace("/home");
     } else {
@@ -83,6 +85,7 @@ const Login: React.FC<Iprops> = (props) => {
           "userinfo",
           JSON.stringify({ _loginName, _password })
         );
+        await props.setUserInfoMy({ _loginName, _password });
         props.history.replace("/home");
       } else {
         throw new Error("用户名密码错误");
@@ -190,8 +193,13 @@ const Login: React.FC<Iprops> = (props) => {
 };
 
 export default connect(
-  (state: StoreState) => ({
-    name: state.User.userinfo.username,
-  }),
-  null
+  (state: StoreState) => ({}),
+
+  (dispatch: any) => {
+    return {
+      setUserInfoMy(res: object) {
+        dispatch(setUserInfo(res));
+      },
+    };
+  }
 )(Login);
