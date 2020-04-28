@@ -1,29 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Layout } from "antd";
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import "./BasicLayout.scss";
-import { MenuDefault, Footer } from "src/components";
 
-const { Header, Content } = Layout;
+import "./BasicLayout.scss";
+import { MenuDefault, Footer, Header } from "src/components";
+
+const { Content } = Layout;
+
+const onLogout = () => {};
 
 const BasicLayout: React.FC<{}> = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const toggle = () => {
-    setCollapsed(!collapsed);
-  };
   return (
     <Layout hasSider className="page-basic">
       <MenuDefault collapsed={collapsed} />
       <Layout className="site-layout">
-        <Header className="site-layout-background" style={{ padding: 0 }}>
-          {React.createElement(
-            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-            {
-              className: "trigger",
-              onClick: toggle,
-            }
-          )}
-        </Header>
+        <Header
+          onLogout={onLogout}
+          setColl={(coll) => setCollapsed(coll)}
+          collapsed={collapsed}
+        />
         <Content
           className="site-layout-background"
           style={{

@@ -6,3 +6,17 @@
     margin-bottom: 20px;
   }
 }
+.header .trigger {
+  padding: 0 24px;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 64px;
+  transition: all 0.3s;
+  &:hover {
+    background-color: #d1e3fa;
+  }
+}
+
+.menu .ant-dropdown-menu-item {
+  width: 160px;
+}
