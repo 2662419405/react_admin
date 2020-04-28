@@ -21,7 +21,7 @@ const MenuDefault: React.FC<Iprops> = (props) => {
 
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
-      <div className="logo">
+      <div className="logo-home">
         <Link className="logo-link" to="/">
           <img src={require("src/assets/img/logo.f16d.png")} />
           <div className={collapsed ? "show" : ""}>TS + Hooks</div>
