@@ -1,0 +1,27 @@
+.logo {
+  height: 64px;
+  background-color: #001529;
+  .logo-link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    img {
+      width: 40px;
+      -webkit-flex: none;
+      flex: none;
+      margin-left: 12px;
+    }
+    div {
+      color: #fff;
+      width: 100%;
+      font-size: 24px;
+      padding-left: 10px;
+      white-space: nowrap;
+      transition: all 0.3s;
+      display: block;
+      &.show {
+        display: none;
+      }
+    }
+  }
+}
