@@ -148,7 +148,7 @@ const Login: React.FC<Iprops> = (props) => {
               onKeyDown={(e) => {
                 if (e.keyCode === 13) handleSubmit();
               }}
-              prefix={<PictureOutlined className="anticon-plus" />}
+              prefix={<PictureOutlined />}
               onPressEnter={handleSubmit}
               maxLength={4}
               autoComplete="off"
