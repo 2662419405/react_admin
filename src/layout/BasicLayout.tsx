@@ -1,8 +1,9 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { Layout } from "antd";
 
 import "./BasicLayout.scss";
 import { MenuDefault, Footer, Header } from "src/components";
+import Routers from "src/router/homeRouter";
 
 const { Content } = Layout;
 
@@ -27,7 +28,7 @@ const BasicLayout: React.FC<{}> = () => {
             minHeight: 280,
           }}
         >
-          Content
+          <Routers />
         </Content>
         <Footer />
       </Layout>
