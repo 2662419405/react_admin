@@ -5,7 +5,6 @@ import {
   FullscreenExitOutlined,
   FullscreenOutlined,
   MessageOutlined,
-  ChromeOutlined,
   SmileOutlined,
   LogoutOutlined,
   UserOutlined,

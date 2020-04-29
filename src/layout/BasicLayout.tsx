@@ -9,7 +9,11 @@ const { Content } = Layout;
 
 const onLogout = () => {};
 
-const BasicLayout: React.FC<{}> = () => {
+interface Iprops {
+  location: Location;
+}
+
+const BasicLayout: React.FC<Iprops> = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout hasSider className="page-basic">
@@ -28,7 +32,7 @@ const BasicLayout: React.FC<{}> = () => {
             minHeight: 280,
           }}
         >
-          <Routers />
+          <Routers location={props.location} />
         </Content>
         <Footer />
       </Layout>
