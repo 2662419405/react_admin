@@ -24,7 +24,7 @@ class ErrorBoundary extends React.PureComponent<Iprops, IState> {
   }
 
   static getDerivedStateFromError() {
-    return { hasError: false };
+    return { hasError: true };
   }
 
   componentDidUpdate(prevP: Iprops) {

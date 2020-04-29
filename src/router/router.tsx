@@ -1,5 +1,5 @@
 import React, { Suspense, useCallback, useEffect } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Loading } from "src/components";
 import { StoreState } from "src/store";
@@ -38,14 +38,14 @@ const Routers: React.FC<Iprops> = (props) => {
   }, []);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Suspense fallback={<Loading />}>
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/home" render={(props) => onEnter(BasicLayout, props)} />
         </Switch>
       </Suspense>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
