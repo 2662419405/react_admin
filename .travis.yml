@@ -1,11 +1,14 @@
 language: node_js
 node_js:
-  - "stable"
-cache:
-  directories:
-  - node_modules
-env:
-  - CI=true
+  - lts/*
+before_install:
+  - npm install -g create-react-app
+install:
+  - yarn
 script:
-  - npm run build
-  
+  - yarn build
+notifications:
+  email:
+    - 2662419405@qq.com
+  on_success: change
+  on_failure: always
