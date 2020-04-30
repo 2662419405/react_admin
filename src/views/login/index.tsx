@@ -29,7 +29,7 @@ import { Footer } from "src/components";
 // 类型声明
 // ==================
 import { RouteComponentProps } from "react-router-dom";
-import { Ilogin } from "src/types";
+import { Ilogin } from "src/types/global";
 
 interface Iprops extends RouteComponentProps {
   setUserInfoMy: any;

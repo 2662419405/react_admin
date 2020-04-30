@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { MenuConfig } from "src/constants";
 import { Icon } from "src/components";
-import { Menu as MenuTypes } from "src/types";
+import { Menu as MenuTypes } from "src/types/global";
 
 const { Sider } = Layout;
 
