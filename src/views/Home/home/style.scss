@@ -1,0 +1,15 @@
+.home-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #fff;
+  flex-direction: column;
+  .title {
+    font-size: 30px;
+  }
+  img {
+    animation: spin 3s linear infinite;
+    margin-bottom: 30px;
+  }
+}

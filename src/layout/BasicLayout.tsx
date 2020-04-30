@@ -1,20 +1,33 @@
 import React, { useState } from "react";
-import { Layout } from "antd";
+import { Layout, Modal } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 import "./BasicLayout.scss";
-import { MenuDefault, Footer, Header } from "src/components";
+import { MenuDefault, Footer, Header, Bread } from "src/components";
 import Routers from "src/router/homeRouter";
 
 const { Content } = Layout;
-
-const onLogout = () => {};
+const { confirm } = Modal;
 
 interface Iprops {
   location: Location;
+  history: any;
 }
 
 const BasicLayout: React.FC<Iprops> = (props) => {
   const [collapsed, setCollapsed] = useState(false);
+  const onLogout = () => {
+    confirm({
+      title: "你确定要退出登录吗?",
+      icon: <ExclamationCircleOutlined />,
+      onOk() {
+        localStorage.removeItem("userinfo");
+        console.log(props.history.replace("/"));
+      },
+      onCancel() {},
+    });
+  };
+
   return (
     <Layout hasSider className="page-basic">
       <MenuDefault collapsed={collapsed} />
@@ -24,6 +37,7 @@ const BasicLayout: React.FC<Iprops> = (props) => {
           setColl={(coll) => setCollapsed(coll)}
           collapsed={collapsed}
         />
+        <Bread />
         <Content
           className="site-layout-background"
           style={{

@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useMemo, useCallback } from "react";
 import { Menu, Layout } from "antd";
 import "./MenuDefault.scss";
-import {
-  UserOutlined,
-  HomeOutlined,
-  BookOutlined,
-  QuestionCircleOutlined,
-} from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { RouteComponentProps, withRouter } from "react-router-dom";
+import { MenuConfig } from "src/constants";
+import { Icon } from "src/components";
+import { Menu as MenuTypes } from "src/types";
 
 const { Sider } = Layout;
 
@@ -18,6 +15,42 @@ interface Iprops extends RouteComponentProps {
 
 const MenuDefault: React.FC<Iprops> = (props) => {
   const { collapsed } = props;
+
+  /** 构建树结构 **/
+  const makeTreeDom = useCallback((data): JSX.Element[] => {
+    return data.map((v: MenuTypes) => {
+      if (v.children) {
+        return (
+          <Menu.SubMenu
+            key={v.key}
+            title={
+              <span>
+                <Icon type={v.icon} />
+                <span>{v.title}</span>
+              </span>
+            }
+          >
+            {makeTreeDom(v.children)}
+          </Menu.SubMenu>
+        );
+      } else {
+        return (
+          <Menu.Item key={v.key}>
+            <Link to={v.key}>
+              <Icon type={v.icon} />
+              <span>{v.title}</span>
+            </Link>
+          </Menu.Item>
+        );
+      }
+    });
+  }, []);
+
+  /** 处理原始数据，将原始数据处理为层级关系 **/
+  const treeDom: JSX.Element[] = useMemo(() => {
+    const treeDom = makeTreeDom(MenuConfig);
+    return treeDom;
+  }, [MenuConfig]);
 
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -32,44 +65,7 @@ const MenuDefault: React.FC<Iprops> = (props) => {
         mode="inline"
         defaultSelectedKeys={[props.history.location.pathname]}
       >
-        <Menu.Item key="/home">
-          <Link to="/home">
-            <HomeOutlined />
-            <span>首页</span>
-          </Link>
-        </Menu.Item>
-        <Menu.SubMenu
-          key="sub2"
-          title={
-            <span>
-              <UserOutlined />
-              <span>账号管理</span>
-            </span>
-          }
-        >
-          <Menu.Item key="/home/user/admin">
-            <Link to="/home/user/admin">
-              <span>用户管理</span>
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="/home/user/level">
-            <Link to="/home/user/level">
-              <span>权限管理</span>
-            </Link>
-          </Menu.Item>
-        </Menu.SubMenu>
-        <Menu.Item key="/home/book">
-          <Link to="/home/book">
-            <BookOutlined />
-            <span>笔记管理</span>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="/home/about">
-          <Link to="/home/about">
-            <QuestionCircleOutlined />
-            <span>关于本站</span>
-          </Link>
-        </Menu.Item>
+        {treeDom}
       </Menu>
     </Sider>
   );

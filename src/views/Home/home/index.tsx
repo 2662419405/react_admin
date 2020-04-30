@@ -1,13 +1,15 @@
-import React, { ReactElement, useEffect } from "react";
-import Axios from "axios";
+import React from "react";
+import "./style.scss";
 
-interface Props {}
+const Home: React.FC<{}> = (props) => {
+  return (
+    <div className="home-page">
+      <img src={require("src/assets/img/react-logo.jpg")} alt="logo" />
+      <div className="title">React-admin</div>
+      <p>标准TS + Hooks分层结构，react16、router4、antd4、webpack4、ES6+、TS、Hooks</p>
+      <p>后台管理系统模块</p>
+    </div>
+  );
+};
 
-export default function Home({}: Props): ReactElement {
-  useEffect(() => {
-    Axios.get("http://mock.shtodream.cn/mock/5ea655fa0f0ab03f6d504777/login").then((res) => {
-      console.log(res);
-    });
-  }, []);
-  return <div>123</div>;
-}
+export default Home;
