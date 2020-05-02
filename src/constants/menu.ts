@@ -4,37 +4,37 @@
 export const MenuConfig = [
   {
     key: "/home",
-    icon: "icon-home",
+    icon: "iconhome",
     title: "首页",
   },
   {
     key: "/home/echarts",
-    icon: "icon-shuju",
+    icon: "iconshuju",
     title: "数据管理",
   },
   {
     key: "/home/user",
-    icon: "icon-yonghu",
+    icon: "iconzhanghao",
     title: "账号管理",
     children: [
       {
         key: "/home/user/admin",
-        title: "用户管理",
+        title: "个人中心",
       },
       {
         key: "/home/user/level",
-        title: "权限管理",
+        title: "个人设置",
       },
     ],
   },
   {
     key: "/home/book",
-    icon: "icon-biji",
+    icon: "iconbiji",
     title: "笔记管理",
   },
   {
     key: "/home/about",
-    icon: "icon-guanyu",
+    icon: "iconguanyu",
     title: "关于本站",
   },
 ];

@@ -4,9 +4,9 @@ node_js:
 before_install:
   - npm install -g create-react-app
 install:
-  - yarn
+  - cnpm
 script:
-  - yarn build
+  - cnpm run build
 notifications:
   email:
     - 2662419405@qq.com

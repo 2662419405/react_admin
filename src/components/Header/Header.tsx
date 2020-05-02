@@ -11,6 +11,7 @@ import {
 } from "@ant-design/icons";
 import "./Header.scss";
 import { Layout, Tooltip, Menu, Dropdown } from "antd";
+import { Link } from "react-router-dom";
 
 const { Header } = Layout;
 
@@ -107,12 +108,16 @@ const Headers: React.FC<Iprops> = (props) => {
           overlay={
             <Menu className="menu" selectedKeys={[]} onClick={onMenuClick}>
               <Menu.Item key="user">
-                <UserOutlined />
-                个人中心
+                <Link to="/home/user/admin">
+                  <UserOutlined />
+                  个人中心
+                </Link>
               </Menu.Item>
               <Menu.Item key="message">
-                <MessageOutlined />
-                消息
+                <Link to="/home/user/level">
+                  <MessageOutlined />
+                  个人设置
+                </Link>
               </Menu.Item>
               <Menu.Divider />
               <Menu.Item key="logout">
