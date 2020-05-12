@@ -37,6 +37,9 @@ interface Iprops extends RouteComponentProps {
 
 let captcha = getRandom();
 
+var a = 3;
+var a = 10;
+
 const Login: React.FC<Iprops> = (props) => {
   const username = useInput("");
   const password = useInput("");
