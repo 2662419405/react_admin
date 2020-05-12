@@ -6,6 +6,7 @@ export interface IAxios {
   methods?: string;
   isShow?: boolean;
   data?: object;
+  other?: boolean;
 }
 
 export class myAxios {
@@ -15,8 +16,9 @@ export class myAxios {
       loading.style.display = "block";
     }
     return new Promise((resolve, reject) => {
+      let url = options.other ? options.url : `${Config.BaseURL}${options.url}`;
       Axios({
-        url: `${Config.BaseURL}${options.url}`,
+        url,
         method: "get",
         timeout: 3000,
       }).then((response) => {
@@ -25,9 +27,7 @@ export class myAxios {
           loading.style.display = "none";
         }
         if (response.status === 200) {
-          if (response.data.code === "0") {
-            resolve(response.data);
-          }
+          resolve(response.data);
         } else {
           reject(response.data.data);
         }
