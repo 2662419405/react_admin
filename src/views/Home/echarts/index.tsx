@@ -1,36 +1,38 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { myAxios } from "src/utils";
+import ReactEcharts from "echarts-for-react";
 
-interface Idata {
-  offlineChartData: any[];
-}
 interface Props {}
 
 const Echarts: React.FC<Props> = () => {
-  const [offlineChartData, setOfflineChartData] = useState<any[]>([]);
-  const [offlineData, setOfflineData] = useState([]);
-  const [radarData, setRadarData] = useState([]);
-  const [salesData, setSalesData] = useState([]);
-  const [salesTypeData, setSalesTypeData] = useState([]);
-  const [salesTypeDataOffline, setSalesTypeDataOffline] = useState([]);
-  const [salesTypeDataOnline, setSalesTypeDataOnline] = useState([]);
-  const [searchData, setSearchData] = useState([]);
-  const [visitData, setVisitData] = useState([]);
-  const [visitData2, setVisitData2] = useState([]);
-  const [data, setData] = useState({});
-  useEffect(() => {
-    getDefaultData();
-  }, []);
-
-  const getDefaultData = useCallback(async () => {
-    const data = (await myAxios.getData({
-      url: "https://proapi.azurewebsites.net//api/fake_chart_data",
-      other: true,
-    })) as Idata[];
-    console.log(data["offlineChartData" as any]);
-  }, []);
-
-  return <div>123</div>;
+  const getOption = {
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    },
+    yAxis: {
+      type: "value",
+    },
+    series: [
+      {
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: "line",
+        areaStyle: {},
+      },
+    ],
+  };
+  return (
+    <ReactEcharts
+      option={getOption}
+      notMerge={true}
+      lazyUpdate={true}
+      theme={"theme_name"}
+      // onChartReady={this.onChartReadyCallback}
+      // onEvents={EventsDict}
+      // opts={}
+    />
+  );
 };
 
 export default Echarts;
