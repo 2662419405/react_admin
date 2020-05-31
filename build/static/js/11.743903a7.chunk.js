@@ -1,2 +1,0 @@
-(this.webpackJsonpreact_admin=this.webpackJsonpreact_admin||[]).push([[11],{1016:function(e,t,n){"use strict";n.r(t);var a=n(0),c=n.n(a),i=n(156);t.default=function(){return c.a.createElement("div",null,"\u5173\u4e8e",c.a.createElement(i.f,{type:"iconhome"}))}}}]);
-//# sourceMappingURL=11.743903a7.chunk.js.map
