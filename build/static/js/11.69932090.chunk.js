@@ -1,0 +1,1 @@
+(this.webpackJsonpreact_admin=this.webpackJsonpreact_admin||[]).push([[11],{1034:function(e,t,n){"use strict";n.r(t);var a=n(0),c=n.n(a),i=n(168);t.default=function(){return c.a.createElement("div",null,"\u5173\u4e8e",c.a.createElement(i.f,{type:"iconhome"}))}}}]);
