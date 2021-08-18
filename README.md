@@ -15,7 +15,7 @@
 
 ## 快速预览
 
-[线上](http://hooks.shtodream.cn/)
+[线上](http://hooks.sunhang.top/)
 
 <img src="https://cdn.jsdelivr.net/gh/2662419405/imgs/tu/20200430112812.jpg"/>
 
